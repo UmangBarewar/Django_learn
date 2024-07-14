@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Select an Anime to Stream</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+
+{% if selected_anime %}
+    <h2>You selected: {{ selected_anime.name }}</h2>
+    <img src="{{ selected_anime.image.url }}" alt="{{ selected_anime.name }}">
+    <p>{{ selected_anime.description }}</p>
+    <p>Rating: {{ selected_anime.rating }}</p>
+    <p>Genre: {{ selected_anime.genre }}</p>
+    <p>Year: {{ selected_anime.year }}</p>
+    <p>Episodes: {{ selected_anime.episodes }}</p>
+{% endif %}
+{% endblock %}

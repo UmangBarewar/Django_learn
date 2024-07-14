@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Home Page
+{% endblock %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">app_1 | This is the home page of the app</h1>
+<a href="{% url 'stream'%}">
+    <button
+    type="button"
+    class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium 
+    rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 
+    focus:ring-offset-2 focus:ring-orange-500">
+      Stream Page
+    </button></a>
+
+<div class="grid grid-rows-3 gap-2">
+    {% for anime in animes %}
+        <div class="card w-10 m-2 bg-orange-300 shadow-md rounded-lg overflow-hidden">
+            <img src="{{ anime.image.url }}" class="w-full h-20 object-cover">
+            <div class="p-4">
+                <h2 class="text-lg font-semibold">{{ anime.name }}</h2>
+                <p class="text-gray-700">{{ anime.description }}</p>
+                <p class="text-sm text-blue-500">Rating: {{ anime.rating }}</p>
+                <p class="text-sm text-blue-500">Genre: {{ anime.genre }}</p>
+                <p class="text-sm text-blue-500">Year: {{ anime.year }}</p>
+                <p class="text-sm text-blue-500">Episodes: {{ anime.episodes }}</p>
+                <a href="{% url 'detail' anime.id%}">
+                <button
+                type="button"
+                class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium 
+                rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 
+                focus:ring-offset-2 focus:ring-orange-500">
+                  {{ anime.name }} - Total Episodes {{ anime.episodes }}
+                </button></a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
